@@ -11,8 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Loading and preprocessing the data
 
-DataFileName <- "./RepData_PeerAssessment1/activity.zip"
-dataDir <- "./RepData_PeerAssessment1/data"
+```{r perAssignment, echo = TRUE}
+DataFileName <- "./activity.zip"
+dataDir <- "./data"
 
 
 if (!file.exists(dataDir)) {
@@ -21,13 +22,50 @@ if (!file.exists(dataDir)) {
 }
 
 
+data <- read.csv("./data/activity.csv", header = TRUE, sep = ",")
+data1 <- na.omit(data)
+
+
+total <- as.numeric(nrow(data))
+valid <- as.numeric(nrow(data1))
+percent <- trunc((total - valid)*100/total)
+steps <- data1$steps
+
+```
+There are `r percent`% of missing values ommited.
 
 ## What is mean total number of steps taken per day?
 
 
+```{r}
+hist(steps)
+```
+
+
+```{r meanperday, echo = TRUE, results = "asis"}
+
+
+
+library(xtable)
+meanPerDay <- aggregate(steps ~ date, data1, mean)
+medianPerDay <- aggregate(steps ~ date, data1, median)
+
+
+tblMeanPerDay <- xtable(meanPerDay)
+print(tblMeanPerDay,type = "html")
+
+
+```
+
+
+
 
 ## What is the average daily activity pattern?
-
+```{r avgintervalperday, echo = TRUE, results = "asis"}
+# library(xtable)
+# avIntervalPerDay <- aggregate(date ~ interval, data1, avearage)
+# tblMeanPerDay <- xtable(meanPerDay)
+# print(tblMeanPerDay,type = "html")
 
 
 ## Imputing missing values
