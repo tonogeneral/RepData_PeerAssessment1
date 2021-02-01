@@ -47,11 +47,15 @@ hist(steps)
 
 
 library(xtable)
+library(dplyr)
 meanPerDay <- aggregate(steps ~ date, data1, mean)
+names(meanPerDay)[2] <- "meanSteps"
 medianPerDay <- aggregate(steps ~ date, data1, median)
+names(medianPerDay)[2] <- "medianSteps"
+summarySteps <- merge(meanPerDay,medianPerDay, all = TRUE)
+str(summarySteps)
 
-
-tblMeanPerDay <- xtable(meanPerDay)
+tblMeanPerDay <- xtable(summarySteps)
 print(tblMeanPerDay,type = "html")
 
 
@@ -62,11 +66,28 @@ print(tblMeanPerDay,type = "html")
 
 ## What is the average daily activity pattern?
 ```{r avgintervalperday, echo = TRUE, results = "asis"}
-# library(xtable)
-# avIntervalPerDay <- aggregate(date ~ interval, data1, avearage)
-# tblMeanPerDay <- xtable(meanPerDay)
-# print(tblMeanPerDay,type = "html")
+library(ggplot2)
+library(dplyr)
 
+
+meanStepInterval <- aggregate(steps ~ interval, data1, mean)
+library(ggplot2)
+
+ggplot(meanStepInterval, aes(interval, steps)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle=45, hjust=1, vjust = 1))
+
+
+maxStepInterval <- meanStepInterval[which.max(meanStepInterval$steps),]
+maxInterval <- maxStepInterval$interval
+maxStep <- maxStepInterval$steps
+
+```
+
+2. Which 5-minute interval, on average across all the days in the dataset,
+contains the maximum number of steps?
+
+A: The 5-minute interval that contains the maximum number of steps is `r maxInterval` with an average of `r maxStep` steps  
 
 ## Imputing missing values
 
