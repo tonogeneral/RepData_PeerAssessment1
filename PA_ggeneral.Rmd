@@ -1,0 +1,37 @@
+---
+title: "PA_ggeneral"
+author: "Gabriel General"
+date: "31-01-2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading and preprocessing the data
+
+DataFileName <- "./RepData_PeerAssessment1/activity.zip"
+dataDir <- "./RepData_PeerAssessment1/data"
+
+
+if (!file.exists(dataDir)) {
+  dir.create(dataDir)
+  unzip(zipfile = DataFileName, exdir = dataDir)
+}
+
+
+
+## What is mean total number of steps taken per day?
+
+
+
+## What is the average daily activity pattern?
+
+
+
+## Imputing missing values
+
+
+
+## Are there differences in activity patterns between weekdays and weekends?
