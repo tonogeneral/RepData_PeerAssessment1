@@ -1,7 +1,7 @@
 ---
 title: "PA_ggeneral"
 author: "Gabriel General"
-date: "31-01-2021"
+date: "20-02-2021 00:31"
 output:
   html_document: default
   pdf_document: default
@@ -50,21 +50,21 @@ There are **`r percent`**% of missing values ommited.
 # What is mean total number of steps taken per day?
 
 ### 1. Make a histogram of the total number of steps taken each day
-```{r}
+```{r, echo = TRUE}
 hist(steps, breaks = 30)
 ```
 
 ### 2. Calculate and report the mean and median total number of steps taken per day
 
 ### Summary of steps
-``` {r, comment=""}
+``` {r, comment="", echo = TRUE}
 print(summary(data1$steps))
 
 ```
 
 
 ### Mean and median of steps by day
-```{r meanperday, echo = FALSE, results = "asis"}
+```{r meanperday, echo = TRUE, results = "asis"}
 
 library(xtable)
 library(dplyr)
@@ -82,7 +82,7 @@ print(tblMeanPerDay,type = "html")
 ```
 
 
-```{r}
+```{r, echo = TRUE}
  
 promedio <- trunc(mean(total_step$steps))
 mediana <- median(total_step$steps)
